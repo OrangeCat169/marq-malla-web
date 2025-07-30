@@ -163,7 +163,19 @@ function mapearGrupos(malla) {
 
 function lanzarFuegosArtificiales(x, y) {
   const container = document.getElementById('fireworks-container');
-  const colors = ['#ffb300', '#29b6f6', '#ab47bc', '#66bb6a', '#ef5350', '#ffa726', '#8d6e63', '#5c6bc0', '#ec407a', '#26a69a'];
+  // Solo tonos de rosado
+  const colors = [
+    '#f8bbd0', // rosa pastel
+    '#f06292', // rosa fuerte
+    '#ec407a', // fucsia
+    '#ad1457', // magenta oscuro
+    '#ff80ab', // rosa claro
+    '#fce4ec', // rosa muy claro
+    '#d81b60', // magenta
+    '#ffb6c1', // pink
+    '#e75480', // pink medio
+    '#ff69b4'  // hot pink
+  ];
   const num = 18 + Math.floor(Math.random() * 6);
 
   for (let i = 0; i < num; i++) {
@@ -193,3 +205,15 @@ function lanzarFuegosArtificiales(x, y) {
     setTimeout(() => firework.remove(), 1200);
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const mallaRect = document.getElementById('malla-rect');
+  const zoomSlider = document.getElementById('zoom-slider');
+  const zoomValue = document.getElementById('zoom-value');
+  function setZoom(val) {
+    mallaRect.style.transform = `scale(${val/100})`;
+    zoomValue.textContent = `${val}%`;
+  }
+  setZoom(zoomSlider.value);
+  zoomSlider.addEventListener('input', () => setZoom(zoomSlider.value));
+});

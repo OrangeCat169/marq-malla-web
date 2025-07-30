@@ -7,19 +7,71 @@
 </head>
 <body>
   <video id="bg-video" autoplay loop muted playsinline>
-    <source src="/videos/videoarq.mp4" type="video/mp4">
+    <source src="videos/videoarq.mp4" type="video/mp4">
     Tu navegador no soporta video en fondo.
   </video>
-  <div class="malla-rect">
-    <h1 class="titulo-malla">
-      <span class="icono-arq">🏛️</span>
-      <span class="wow-titulo">
-        <span class="wow-main">Malla Curricular</span>
-        <span class="wow-marq">Arquitectura (MARQ)</span>
-      </span>
-      <span class="linea-arq"></span>
-      <span class="wow-brillo"></span>
-    </h1>
+  <div class="zoom-control">
+    <label for="zoom-slider">Zoom: </label>
+    <input type="range" id="zoom-slider" min="60" max="120" value="80">
+    <span id="zoom-value">80%</span>
+  </div>
+  <div class="malla-rect" id="malla-rect">
+    <div class="titulo-malla-svg">
+      <svg viewBox="0 0 700 120" width="100%" height="120" class="titulo-svg">
+        <!-- Líneas arquitectónicas principales -->
+        <line x1="40" y1="30" x2="660" y2="30" stroke="#ec407a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="40" y1="90" x2="660" y2="90" stroke="#f8bbd0" stroke-width="4" stroke-linecap="round"/>
+        <!-- Sombra inferior -->
+        <rect x="50" y="82" width="600" height="18" rx="8" fill="#f8bbd0" opacity="0.25"/>
+        <!-- Bloque central con borde doble -->
+        <rect x="60" y="40" width="580" height="40" rx="16" fill="#fff0f6" stroke="#ec407a" stroke-width="3"/>
+        <rect x="65" y="45" width="570" height="30" rx="12" fill="none" stroke="#f06292" stroke-width="1.5" stroke-dasharray="8,6"/>
+        <!-- Bloques decorativos -->
+        <rect x="80" y="55" width="32" height="15" rx="4" fill="#f06292"/>
+        <rect x="588" y="55" width="32" height="15" rx="4" fill="#d81b60"/>
+        <!-- Líneas verticales tipo regla -->
+        <line x1="120" y1="35" x2="120" y2="85" stroke="#f8bbd0" stroke-width="2"/>
+        <line x1="580" y1="35" x2="580" y2="85" stroke="#f8bbd0" stroke-width="2"/>
+        <!-- Marcas de medición -->
+        <line x1="120" y1="35" x2="130" y2="35" stroke="#ec407a" stroke-width="2"/>
+        <line x1="120" y1="85" x2="130" y2="85" stroke="#ec407a" stroke-width="2"/>
+        <line x1="580" y1="35" x2="570" y2="35" stroke="#ec407a" stroke-width="2"/>
+        <line x1="580" y1="85" x2="570" y2="85" stroke="#ec407a" stroke-width="2"/>
+        <!-- Ícono arquitectónico -->
+        <text x="100" y="78" font-size="38" font-family="Segoe UI Emoji">🏛️</text>
+        <!-- Título principal con sombra -->
+        <text x="160" y="75" font-size="44" font-family="Montserrat, Arial Black, Arial, sans-serif" fill="#ad1457" font-weight="bold" letter-spacing="3" style="text-shadow: 2px 2px 8px #f8bbd0;">
+          MARQ
+        </text>
+        <!-- Subtítulo con fondo -->
+        <rect x="270" y="52" width="340" height="28" rx="10" fill="#fce4ec" opacity="0.85"/>
+        <text x="285" y="72" font-size="22" font-family="Montserrat, Arial Black, Arial, sans-serif" fill="#d81b60" font-weight="bold" letter-spacing="1">
+          Malla Curricular Arquitectura UC
+        </text>
+        <!-- Detalles extra: líneas finas -->
+        <line x1="200" y1="100" x2="500" y2="100" stroke="#f8bbd0" stroke-width="1"/>
+        <line x1="200" y1="20" x2="500" y2="20" stroke="#f8bbd0" stroke-width="1"/>
+        <!-- Pequeños círculos decorativos -->
+        <circle cx="60" cy="30" r="4" fill="#ec407a"/>
+        <circle cx="660" cy="90" r="4" fill="#d81b60"/>
+        <!-- Líneas de cota superior e inferior -->
+        <line x1="160" y1="35" x2="340" y2="35" class="linea-cota"/>
+        <line x1="160" y1="95" x2="340" y2="95" class="linea-cota"/>
+        <!-- Flechas de cota -->
+        <polygon points="160,32 155,35 160,38" fill="#f06292"/>
+        <polygon points="340,32 345,35 340,38" fill="#f06292"/>
+        <polygon points="160,92 155,95 160,98" fill="#f06292"/>
+        <polygon points="340,92 345,95 340,98" fill="#f06292"/>
+        <!-- Texto de cota -->
+        <text x="220" y="30" class="texto-cota">180mm</text>
+        <text x="220" y="110" class="texto-cota">180mm</text>
+        <!-- Pequeños círculos técnicos -->
+        <circle cx="200" cy="30" r="2.5" fill="#ec407a"/>
+        <circle cx="300" cy="90" r="2.5" fill="#ec407a"/>
+        <!-- Etiqueta arquitectónica -->
+        <text x="510" y="40" font-size="13" fill="#d81b60" font-family="monospace" opacity="0.7">PLANTA TIPO</text>
+      </svg>
+    </div>
     <div id="contenedor-malla"></div>
   </div>
   <div id="fireworks-container"></div>
