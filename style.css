@@ -22,42 +22,97 @@ h1 {
 .titulo-malla {
   text-align: center;
   font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
-  font-size: 2.7em;
-  letter-spacing: 2px;
+  font-size: 2.8em;
+  letter-spacing: 2.5px;
   color: #1976d2;
   margin-bottom: 0.2em;
-  text-shadow: 2px 2px 12px #b3e5fc, 0 2px 0 #fff;
   background: linear-gradient(90deg, #e3f2fd 60%, #fffde7 100%);
-  border-radius: 22px;
-  padding: 24px 0 18px 0;
-  border-bottom: 5px solid #1976d2;
-  box-shadow: 0 6px 24px #1976d233;
+  border-radius: 28px;
+  padding: 32px 0 24px 0;
+  border-bottom: 7px solid #1976d2;
+  box-shadow: 0 8px 32px #1976d233, 0 2px 0 #388e3c;
   position: relative;
   overflow: hidden;
+  animation: wow-pop 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes wow-pop {
+  0% { transform: scale(0.85) rotateX(30deg); opacity: 0; }
+  70% { transform: scale(1.05) rotateX(0deg); opacity: 1; }
+  100% { transform: scale(1) rotateX(0deg); }
 }
 
 .titulo-malla .icono-arq {
-  font-size: 1.1em;
-  margin-right: 12px;
+  font-size: 1.3em;
+  margin-right: 18px;
   vertical-align: middle;
   filter: drop-shadow(1px 1px 2px #fffde7);
+  animation: icono-bounce 1.2s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
-.titulo-malla .marq {
-  color: #388e3c;
+@keyframes icono-bounce {
+  0% { transform: scale(0.7) rotate(-20deg);}
+  60% { transform: scale(1.2) rotate(10deg);}
+  100% { transform: scale(1) rotate(0);}
+}
+
+.wow-titulo {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.wow-main {
+  display: block;
+  font-size: 1.1em;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  color: #1976d2;
+  text-shadow: 0 2px 12px #b3e5fc, 0 2px 0 #fff;
+  line-height: 1.1;
+}
+
+.wow-marq {
+  display: block;
+  font-size: 0.7em;
   font-weight: bold;
-  letter-spacing: 1.5px;
-  text-shadow: 1px 1px 8px #fffde7;
+  color: #388e3c;
+  letter-spacing: 2px;
+  margin-top: 6px;
+  text-shadow: 0 2px 8px #fffde7, 0 1px 0 #1976d2;
+  background: linear-gradient(90deg, #e3f2fd 30%, #c8e6c9 100%);
+  border-radius: 8px;
+  padding: 2px 16px;
+  box-shadow: 0 2px 8px #388e3c22;
+  border-left: 6px solid #388e3c;
 }
 
 .titulo-malla .linea-arq {
   display: block;
-  width: 80px;
-  height: 5px;
+  width: 120px;
+  height: 7px;
   background: linear-gradient(90deg, #1976d2 60%, #388e3c 100%);
-  border-radius: 3px;
-  margin: 18px auto 0 auto;
+  border-radius: 4px;
+  margin: 22px auto 0 auto;
   box-shadow: 0 2px 8px #1976d233;
+  position: relative;
+  z-index: 1;
+}
+
+.wow-brillo {
+  pointer-events: none;
+  position: absolute;
+  top: 0; left: -80px;
+  width: 80px; height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.05) 100%);
+  filter: blur(2px);
+  animation: wow-brillo-move 2.5s 1.2s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+  opacity: 0.7;
+}
+
+@keyframes wow-brillo-move {
+  0% { left: -80px; opacity: 0.2;}
+  60% { left: 60%; opacity: 0.8;}
+  100% { left: 110%; opacity: 0;}
 }
 
 #contenedor-malla {
@@ -97,17 +152,26 @@ h1 {
 .ramo {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   margin: 0;
   padding: 18px 14px 14px 14px;
   border-radius: 10px;
   box-shadow: 0 2px 8px #0001;
   font-size: 1.05em;
-  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s, color 0.2s;
   position: relative;
   background: #f8f8f8;
   min-height: 54px;
   cursor: pointer;
   border: 2px solid transparent;
+  user-select: none;
+}
+
+.ramo .ramo-nombre {
+  flex: 1;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  pointer-events: none;
 }
 
 .ramo:hover:not(.aprobado):not(.bloqueado) {
@@ -132,6 +196,18 @@ h1 {
   display: none;
 }
 
+.ramo.aprobado {
+  background-color: #e0e0e0;
+  border: 2px solid #bdbdbd;
+  color: #888;
+  opacity: 1;
+  cursor: default;
+}
+
+.ramo.aprobado .ramo-nombre {
+  text-decoration: line-through;
+}
+
 .ramo.bloqueado {
   color: #aaa;
   background-color: #f0f0f0;
@@ -145,20 +221,10 @@ h1 {
   border: 2px solid #ffe082;
 }
 
-.ramo.aprobado {
-  background-color: #e0e0e0;
-  border: 2px solid #bdbdbd;
-  color: #888;
-  opacity: 1;
-  cursor: default;
-}
-
-.ramo label {
-  cursor: pointer;
-  flex: 1;
-  user-select: none;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+.ramo.desbloqueado:hover {
+  box-shadow: 0 4px 16px #007acc33;
+  border: 2px solid #007acc;
+  background: #e3f2fd;
 }
 
 /* Estilos por tipo de ramo */
@@ -211,4 +277,59 @@ h1 {
   z-index: 1;
   border: 3px solid #1976d2;
   backdrop-filter: blur(2px);
+}
+
+.esquina-color {
+  position: absolute;
+  top: 0; left: 0;
+  width: 28px;
+  height: 28px;
+  border-top-left-radius: 10px;
+  z-index: 2;
+  background: #ffb300;
+  box-shadow: 0 2px 6px #0002;
+  content: "";
+  display: block;
+}
+
+#fireworks-container {
+  pointer-events: none;
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
+.firework {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.bloque-anio {
+  margin-bottom: 40px;
+  padding: 18px 0 28px 0;
+  border-radius: 24px;
+  background: rgba(230, 244, 255, 0.45);
+  box-shadow: 0 2px 16px #1976d222;
+  border: 2px solid #1976d2;
+  position: relative;
+}
+
+.titulo-anio {
+  font-size: 1.7em;
+  font-weight: bold;
+  color: #1976d2;
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px #b3e5fc, 0 2px 0 #fff;
+}
+
+.anio-semestres {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
 }
