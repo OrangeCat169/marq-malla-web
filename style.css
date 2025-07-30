@@ -6,56 +6,120 @@ body {
 
 h1 {
   text-align: center;
+  font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+  font-size: 2.5em;
+  letter-spacing: 2px;
+  color: #007acc;
+  margin-bottom: 0.2em;
+  text-shadow: 2px 2px 8px #b3e5fc, 0 2px 0 #fff;
+  background: linear-gradient(90deg, #e3f2fd 60%, #fffde7 100%);
+  border-radius: 18px;
+  padding: 18px 0 12px 0;
+  border-bottom: 4px solid #007acc;
+  box-shadow: 0 4px 16px #007acc22;
+}
+
+.titulo-malla {
+  text-align: center;
+  font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+  font-size: 2.7em;
+  letter-spacing: 2px;
+  color: #1976d2;
+  margin-bottom: 0.2em;
+  text-shadow: 2px 2px 12px #b3e5fc, 0 2px 0 #fff;
+  background: linear-gradient(90deg, #e3f2fd 60%, #fffde7 100%);
+  border-radius: 22px;
+  padding: 24px 0 18px 0;
+  border-bottom: 5px solid #1976d2;
+  box-shadow: 0 6px 24px #1976d233;
+  position: relative;
+  overflow: hidden;
+}
+
+.titulo-malla .icono-arq {
+  font-size: 1.1em;
+  margin-right: 12px;
+  vertical-align: middle;
+  filter: drop-shadow(1px 1px 2px #fffde7);
+}
+
+.titulo-malla .marq {
+  color: #388e3c;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 8px #fffde7;
+}
+
+.titulo-malla .linea-arq {
+  display: block;
+  width: 80px;
+  height: 5px;
+  background: linear-gradient(90deg, #1976d2 60%, #388e3c 100%);
+  border-radius: 3px;
+  margin: 18px auto 0 auto;
+  box-shadow: 0 2px 8px #1976d233;
 }
 
 #contenedor-malla {
   display: flex;
-  gap: 36px; /* Más separación entre semestres */
+  gap: 36px;
   justify-content: flex-start;
   align-items: flex-start;
   margin-top: 40px;
   overflow-x: auto;
+  padding-bottom: 32px;
 }
 
 .semestre {
   min-width: 240px;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px #0001;
-  padding: 18px 12px 12px 12px;
-  border-left: 6px solid #007acc;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px #007acc22;
+  padding: 22px 14px 18px 14px;
+  border-left: 8px solid #007acc;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 20px; /* Más separación entre ramos */
+  gap: 24px;
+  transition: box-shadow 0.2s;
 }
 
 .semestre h2 {
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1.18em;
   margin-bottom: 18px;
   color: #007acc;
   font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 6px #b3e5fc;
 }
 
 .ramo {
   display: flex;
   align-items: center;
   margin: 0;
-  padding: 14px 10px 10px 10px;
-  border-radius: 7px;
-  box-shadow: 0 1px 3px #0001;
-  font-size: 1em;
-  transition: background 0.2s;
+  padding: 18px 14px 14px 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #0001;
+  font-size: 1.05em;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
   position: relative;
   background: #f8f8f8;
-  min-height: 48px;
+  min-height: 54px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.ramo:hover:not(.aprobado):not(.bloqueado) {
+  box-shadow: 0 4px 16px #007acc33;
+  border: 2px solid #007acc;
+  background: #e3f2fd;
 }
 
 .ramo .aprobado-label {
   position: absolute;
   top: -18px;
-  left: 10px;
+  left: 14px;
   font-size: 0.85em;
   color: #888;
   background: #e0e0e0;
@@ -65,32 +129,86 @@ h1 {
 }
 
 .ramo input[type="checkbox"] {
-  margin-right: 10px;
-  accent-color: #007acc;
-  width: 18px;
-  height: 18px;
+  display: none;
 }
 
 .ramo.bloqueado {
   color: #aaa;
   background-color: #f0f0f0;
   opacity: 0.7;
+  border: 2px dashed #bdbdbd;
+  cursor: not-allowed;
 }
 
 .ramo.desbloqueado {
   background-color: #fffbe7;
-  border: 1.5px solid #ffe082;
+  border: 2px solid #ffe082;
 }
 
 .ramo.aprobado {
   background-color: #e0e0e0;
-  border: 1.5px solid #bdbdbd;
+  border: 2px solid #bdbdbd;
   color: #888;
   opacity: 1;
+  cursor: default;
 }
 
 .ramo label {
   cursor: pointer;
   flex: 1;
   user-select: none;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Estilos por tipo de ramo */
+.ramo.taller {
+  background: linear-gradient(90deg, #e3f2fd 70%, #fffde7 100%);
+  border-left: 8px solid #1976d2;
+}
+.ramo.ciudad {
+  background: linear-gradient(90deg, #e8f5e9 70%, #fffde7 100%);
+  border-left: 8px solid #388e3c;
+}
+.ramo.historia {
+  background: linear-gradient(90deg, #fff3e0 70%, #fffde7 100%);
+  border-left: 8px solid #fbc02d;
+}
+.ramo.construccion {
+  background: linear-gradient(90deg, #fce4ec 70%, #fffde7 100%);
+  border-left: 8px solid #c2185b;
+}
+.ramo.fisica {
+  background: linear-gradient(90deg, #ede7f6 70%, #fffde7 100%);
+  border-left: 8px solid #512da8;
+}
+.ramo.optativo {
+  background: linear-gradient(90deg, #e1f5fe 70%, #fffde7 100%);
+  border-left: 8px solid #0288d1;
+}
+
+/* ...puedes agregar más estilos según los tipos de ramos que tengas... */
+
+#bg-video {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+  opacity: 0.25; /* Puedes ajustar la opacidad */
+  pointer-events: none;
+}
+
+.malla-rect {
+  max-width: 95vw;
+  margin: 40px auto 0 auto;
+  background: rgba(255,255,255,0.92);
+  border-radius: 32px;
+  box-shadow: 0 8px 32px #007acc33, 0 1.5px 0 #1976d2;
+  padding: 36px 24px 32px 24px;
+  position: relative;
+  z-index: 1;
+  border: 3px solid #1976d2;
+  backdrop-filter: blur(2px);
 }
