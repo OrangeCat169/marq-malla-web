@@ -18,17 +18,16 @@
   <div class="malla-rect" id="malla-rect">
     <div class="titulo-malla-svg">
       <svg viewBox="0 0 700 120" width="100%" height="120" class="titulo-svg">
+        <!-- Fondo central más opaco -->
+        <rect x="60" y="32" width="580" height="56" rx="18" fill="#fff0f6" stroke="#ec407a" stroke-width="3"/>
         <!-- Líneas arquitectónicas principales -->
         <line x1="40" y1="30" x2="660" y2="30" stroke="#ec407a" stroke-width="4" stroke-linecap="round"/>
         <line x1="40" y1="90" x2="660" y2="90" stroke="#f8bbd0" stroke-width="4" stroke-linecap="round"/>
         <!-- Sombra inferior -->
-        <rect x="50" y="82" width="600" height="18" rx="8" fill="#f8bbd0" opacity="0.25"/>
-        <!-- Bloque central con borde doble -->
-        <rect x="60" y="40" width="580" height="40" rx="16" fill="#fff0f6" stroke="#ec407a" stroke-width="3"/>
-        <rect x="65" y="45" width="570" height="30" rx="12" fill="none" stroke="#f06292" stroke-width="1.5" stroke-dasharray="8,6"/>
+        <rect x="50" y="82" width="600" height="18" rx="8" fill="#f8bbd0" opacity="0.18"/>
         <!-- Bloques decorativos -->
         <rect x="80" y="55" width="32" height="15" rx="4" fill="#f06292"/>
-        <rect x="588" y="55" width="32" height="15" rx="4" fill="#d81b60"/>
+        <rect x="588" y="55" width="32" height="15" rx="4" fill="#ff80ab"/>
         <!-- Líneas verticales tipo regla -->
         <line x1="120" y1="35" x2="120" y2="85" stroke="#f8bbd0" stroke-width="2"/>
         <line x1="580" y1="35" x2="580" y2="85" stroke="#f8bbd0" stroke-width="2"/>
@@ -37,15 +36,18 @@
         <line x1="120" y1="85" x2="130" y2="85" stroke="#ec407a" stroke-width="2"/>
         <line x1="580" y1="35" x2="570" y2="35" stroke="#ec407a" stroke-width="2"/>
         <line x1="580" y1="85" x2="570" y2="85" stroke="#ec407a" stroke-width="2"/>
-        <!-- Ícono arquitectónico -->
-        <text x="100" y="78" font-size="38" font-family="Segoe UI Emoji">🏛️</text>
-        <!-- Título principal con sombra -->
-        <text x="160" y="75" font-size="44" font-family="Montserrat, Arial Black, Arial, sans-serif" fill="#ad1457" font-weight="bold" letter-spacing="3" style="text-shadow: 2px 2px 8px #f8bbd0;">
+        <!-- Ícono arquitectónico alineado a la izquierda -->
+        <text x="110" y="78" font-size="38" font-family="Segoe UI Emoji">🏛️</text>
+        <!-- Título principal, centrado y con sombra blanca -->
+        <text x="180" y="72" font-size="44" font-family="Montserrat, Arial Black, Arial, sans-serif"
+          fill="#ec407a" font-weight="bold" letter-spacing="3"
+          style="text-shadow: 2px 2px 8px #fff, 0 0 2px #f8bbd0;">
           MARQ
         </text>
-        <!-- Subtítulo con fondo -->
-        <rect x="270" y="52" width="340" height="28" rx="10" fill="#fce4ec" opacity="0.85"/>
-        <text x="285" y="72" font-size="22" font-family="Montserrat, Arial Black, Arial, sans-serif" fill="#d81b60" font-weight="bold" letter-spacing="1">
+        <!-- Subtítulo, centrado y más claro -->
+        <text x="330" y="75" font-size="22" font-family="Montserrat, Arial Black, Arial, sans-serif"
+          fill="#f06292" font-weight="bold" letter-spacing="1"
+          style="text-shadow: 1px 1px 6px #fff;">
           Malla Curricular Arquitectura UC
         </text>
         <!-- Detalles extra: líneas finas -->
@@ -53,7 +55,7 @@
         <line x1="200" y1="20" x2="500" y2="20" stroke="#f8bbd0" stroke-width="1"/>
         <!-- Pequeños círculos decorativos -->
         <circle cx="60" cy="30" r="4" fill="#ec407a"/>
-        <circle cx="660" cy="90" r="4" fill="#d81b60"/>
+        <circle cx="660" cy="90" r="4" fill="#ff80ab"/>
         <!-- Líneas de cota superior e inferior -->
         <line x1="160" y1="35" x2="340" y2="35" class="linea-cota"/>
         <line x1="160" y1="95" x2="340" y2="95" class="linea-cota"/>
@@ -63,18 +65,38 @@
         <polygon points="160,92 155,95 160,98" fill="#f06292"/>
         <polygon points="340,92 345,95 340,98" fill="#f06292"/>
         <!-- Texto de cota -->
-        <text x="220" y="30" class="texto-cota">180mm</text>
-        <text x="220" y="110" class="texto-cota">180mm</text>
+        <text x="220" y="30" class="texto-cota" fill="#f06292" font-family="monospace" font-size="13">180mm</text>
+        <text x="220" y="110" class="texto-cota" fill="#f06292" font-family="monospace" font-size="13">180mm</text>
         <!-- Pequeños círculos técnicos -->
-        <circle cx="200" cy="30" r="2.5" fill="#ec407a"/>
-        <circle cx="300" cy="90" r="2.5" fill="#ec407a"/>
+        <circle cx="200" cy="30" r="2.5" fill="#f06292"/>
+        <circle cx="300" cy="90" r="2.5" fill="#f06292"/>
         <!-- Etiqueta arquitectónica -->
-        <text x="510" y="40" font-size="13" fill="#d81b60" font-family="monospace" opacity="0.7">PLANTA TIPO</text>
+        <text x="510" y="40" font-size="13" fill="#ec407a" font-family="monospace" opacity="0.8">PLANTA TIPO</text>
       </svg>
+    </div>
+    <div class="anio-nav">
+      <button id="anio-prev" title="Año anterior">⬅️</button>
+      <span id="anio-label"></span>
+      <button id="anio-next" title="Año siguiente">➡️</button>
     </div>
     <div id="contenedor-malla"></div>
   </div>
   <div id="fireworks-container"></div>
+  <button id="boton-amor" title="Haz click :)" style="position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#fff0f6;color:#ec407a;border:2px solid #f06292;border-radius:18px;padding:8px 22px;font-size:1.1em;box-shadow:0 2px 8px #f0629222;opacity:0.7;z-index:1001;cursor:pointer;transition:opacity 0.3s;">
+    💖
+  </button>
+  <div id="mensaje-amor" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,240,246,0.98);color:#ec407a;padding:38px 44px 38px 44px;border-radius:32px;font-size:2.2em;font-weight:bold;box-shadow:0 8px 48px #f0629222;z-index:2000;text-align:center;overflow:hidden;">
+    <div class="mensaje-wow">
+      <span class="corazon-grande">💗</span>
+      <span class="mensaje-texto">Te amo mucho<br>Belén Sanchez</span>
+      <span class="corazon-grande">💗</span>
+      <div class="corazones-pequenos">
+        <span>💖</span><span>💞</span><span>💕</span><span>💓</span>
+      </div>
+    </div>
+  </div>
+  <div id="corazones-vuelo"></div>
+  <audio id="audio-amor" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae5b6.mp3" preload="auto"></audio>
   <script src="script.js"></script>
 </body>
 </html>

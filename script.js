@@ -25,89 +25,145 @@ function renderMalla() {
   const contenedor = document.getElementById('contenedor-malla');
   contenedor.innerHTML = '';
 
+  // Agrupa ramos por semestre
   const porSemestre = {};
-
   malla.forEach(r => {
     if (!porSemestre[r.Semestre]) porSemestre[r.Semestre] = [];
     porSemestre[r.Semestre].push(r);
   });
 
+  // Calcula el máximo año
   const semestres = Object.keys(porSemestre).map(Number).sort((a, b) => a - b);
   const maxSemestre = Math.max(...semestres);
+  maxAnio = Math.ceil(maxSemestre / 2);
 
-  for (let i = 1, year = 1; i <= maxSemestre; i += 2, year++) {
-    // Bloque de año
-    const bloqueAnio = document.createElement('div');
-    bloqueAnio.className = 'bloque-anio';
+  // Solo renderiza el año actual
+  const year = anioActual;
+  const bloqueAnio = document.createElement('div');
+  bloqueAnio.className = 'bloque-anio';
 
-    // Título del año
-    const tituloAnio = document.createElement('div');
-    tituloAnio.className = 'titulo-anio';
-    tituloAnio.textContent = `Año ${year}`;
-    bloqueAnio.appendChild(tituloAnio);
+  // Título del año
+  const tituloAnio = document.createElement('div');
+  tituloAnio.className = 'titulo-anio';
+  tituloAnio.textContent = `Año ${year}`;
+  bloqueAnio.appendChild(tituloAnio);
 
-    // Contenedor de semestres de este año
-    const contSemestres = document.createElement('div');
-    contSemestres.className = 'anio-semestres';
+  // Contenedor de semestres de este año
+  const contSemestres = document.createElement('div');
+  contSemestres.className = 'anio-semestres';
 
-    // Semestre i y i+1
-    [i, i + 1].forEach(sem => {
-      if (porSemestre[sem]) {
-        const bloque = document.createElement('div');
-        bloque.className = 'semestre';
-        const titulo = document.createElement('h2');
-        titulo.textContent = `Semestre ${sem}`;
-        bloque.appendChild(titulo);
+  // Semestre i y i+1
+  const i = (year - 1) * 2 + 1;
+  [i, i + 1].forEach(sem => {
+    if (porSemestre[sem]) {
+      const bloque = document.createElement('div');
+      bloque.className = 'semestre';
+      const titulo = document.createElement('h2');
+      titulo.textContent = `Semestre ${sem}`;
+      bloque.appendChild(titulo);
 
-        porSemestre[sem].forEach(ramo => {
-          const aprobado = estado[ramo.Codigo] || false;
-          const desbloqueado = puedeTomar(ramo) && !aprobado;
+      porSemestre[sem].forEach(ramo => {
+        const aprobado = estado[ramo.Codigo] || false;
+        const desbloqueado = puedeTomar(ramo) && !aprobado;
 
-          const div = document.createElement('div');
-          div.className = 'ramo ' + tipoRamo(ramo.Nombre);
+        const div = document.createElement('div');
+        div.className = 'ramo ' + tipoRamo(ramo.Nombre);
 
-          if (aprobado) {
-            div.classList.add('aprobado');
-            const aprobadoLabel = document.createElement('span');
-            aprobadoLabel.className = 'aprobado-label';
-            aprobadoLabel.textContent = 'Aprobado';
-            div.appendChild(aprobadoLabel);
-          } else if (desbloqueado) {
-            div.classList.add('desbloqueado');
-            div.addEventListener('click', (e) => {
-              estado[ramo.Codigo] = true;
-              // Coordenadas del click relativas a la ventana
-              lanzarFuegosArtificiales(e.clientX, e.clientY);
-              renderMalla();
-            });
-          } else {
-            div.classList.add('bloqueado');
-          }
+        if (aprobado) {
+          div.classList.add('aprobado');
+          const aprobadoLabel = document.createElement('span');
+          aprobadoLabel.className = 'aprobado-label';
+          aprobadoLabel.textContent = 'Aprobado';
+          div.appendChild(aprobadoLabel);
+        } else if (desbloqueado) {
+          div.classList.add('desbloqueado');
+          div.addEventListener('click', (e) => {
+            estado[ramo.Codigo] = true;
+            // Coordenadas del click relativas a la ventana
+            lanzarFuegosArtificiales(e.clientX, e.clientY);
+            renderMalla();
+          });
+        } else {
+          div.classList.add('bloqueado');
+        }
 
-          const label = document.createElement('span');
-          label.textContent = ramo.Nombre;
-          label.className = 'ramo-nombre';
-          div.appendChild(label);
+        const label = document.createElement('span');
+        label.textContent = ramo.Nombre;
+        label.className = 'ramo-nombre';
+        div.appendChild(label);
 
-          const grupo = grupoPorCodigo[ramo.Codigo] ?? 0;
-          const color = grupoColores[grupo % grupoColores.length];
+        const grupo = grupoPorCodigo[ramo.Codigo] ?? 0;
+        const color = grupoColores[grupo % grupoColores.length];
 
-          // Esquina de color para el grupo de conexión
-          const esquina = document.createElement('span');
-          esquina.className = 'esquina-color';
-          esquina.style.background = color;
-          div.appendChild(esquina);
+        // Esquina de color para el grupo de conexión
+        const esquina = document.createElement('span');
+        esquina.className = 'esquina-color';
+        esquina.style.background = color;
+        div.appendChild(esquina);
 
-          bloque.appendChild(div);
-        });
+        bloque.appendChild(div);
+      });
 
-        contSemestres.appendChild(bloque);
-      }
-    });
+      contSemestres.appendChild(bloque);
+    }
+  });
 
-    bloqueAnio.appendChild(contSemestres);
-    contenedor.appendChild(bloqueAnio);
-  }
+  bloqueAnio.appendChild(contSemestres);
+  contenedor.appendChild(bloqueAnio);
+
+  // Actualiza el label del año
+  document.getElementById('anio-label').textContent = `Año ${anioActual}`;
+  // Desactiva botones si corresponde
+  document.getElementById('anio-prev').disabled = (anioActual === 1);
+  document.getElementById('anio-next').disabled = (anioActual === maxAnio);
+
+  const decoracion = document.createElement('div');
+  decoracion.className = 'decoracion-anio';
+  decoracion.innerHTML = `
+    <span class="mini-animalito" style="--delay:0.1s;">
+      <svg viewBox="0 0 48 48" class="icono-monito-gato">
+        <circle cx="24" cy="24" r="20"/>
+        <ellipse class="cara" cx="24" cy="28" rx="12" ry="10"/>
+        <ellipse class="ojo" cx="18" cy="26" rx="2" ry="3"/>
+        <ellipse class="ojo" cx="30" cy="26" rx="2" ry="3"/>
+        <ellipse class="boca" cx="24" cy="32" rx="3" ry="2"/>
+        <polygon points="10,18 18,10 16,22" class="oreja" fill="#f8bbd0"/>
+        <polygon points="38,10 30,18 32,22" class="oreja" fill="#f8bbd0"/>
+      </svg>
+    </span>
+    <span class="mini-animalito" style="--delay:0.5s;">
+      <svg viewBox="0 0 48 48" class="icono-monito-perezoso">
+        <ellipse cx="24" cy="28" rx="14" ry="10"/>
+        <ellipse class="cara" cx="24" cy="28" rx="10" ry="8"/>
+        <ellipse class="ojo" cx="20" cy="28" rx="2" ry="3"/>
+        <ellipse class="ojo" cx="28" cy="28" rx="2" ry="3"/>
+        <ellipse class="boca" cx="24" cy="34" rx="3" ry="2"/>
+        <ellipse cx="24" cy="22" rx="6" ry="2" fill="#f8bbd0"/>
+      </svg>
+    </span>
+    <span class="mini-animalito" style="--delay:1.1s;">
+      <svg viewBox="0 0 48 48" class="icono-monito-gato">
+        <circle cx="24" cy="24" r="20"/>
+        <ellipse class="cara" cx="24" cy="28" rx="12" ry="10"/>
+        <ellipse class="ojo" cx="18" cy="26" rx="2" ry="3"/>
+        <ellipse class="ojo" cx="30" cy="26" rx="2" ry="3"/>
+        <ellipse class="boca" cx="24" cy="32" rx="3" ry="2"/>
+        <polygon points="10,18 18,10 16,22" class="oreja" fill="#f8bbd0"/>
+        <polygon points="38,10 30,18 32,22" class="oreja" fill="#f8bbd0"/>
+      </svg>
+    </span>
+    <span class="mini-animalito" style="--delay:1.7s;">
+      <svg viewBox="0 0 48 48" class="icono-monito-perezoso">
+        <ellipse cx="24" cy="28" rx="14" ry="10"/>
+        <ellipse class="cara" cx="24" cy="28" rx="10" ry="8"/>
+        <ellipse class="ojo" cx="20" cy="28" rx="2" ry="3"/>
+        <ellipse class="ojo" cx="28" cy="28" rx="2" ry="3"/>
+        <ellipse class="boca" cx="24" cy="34" rx="3" ry="2"/>
+        <ellipse cx="24" cy="22" rx="6" ry="2" fill="#f8bbd0"/>
+      </svg>
+    </span>
+  `;
+  bloqueAnio.appendChild(decoracion);
 }
 
 function puedeTomar(ramo) {
@@ -217,3 +273,58 @@ document.addEventListener('DOMContentLoaded', () => {
   setZoom(zoomSlider.value);
   zoomSlider.addEventListener('input', () => setZoom(zoomSlider.value));
 });
+
+let anioActual = 1;
+let maxAnio = 1;
+
+document.getElementById('anio-prev').onclick = () => {
+  if (anioActual > 1) {
+    anioActual--;
+    renderMalla();
+  }
+};
+document.getElementById('anio-next').onclick = () => {
+  if (anioActual < maxAnio) {
+    anioActual++;
+    renderMalla();
+  }
+};
+
+document.getElementById('boton-amor').onclick = () => {
+  const mensaje = document.getElementById('mensaje-amor');
+  const corazones = document.getElementById('corazones-vuelo');
+  const audio = document.getElementById('audio-amor');
+  mensaje.style.display = 'block';
+  mensaje.style.opacity = '1';
+
+  // Reproduce el sonido bonito
+  audio.currentTime = 0;
+  audio.play();
+
+  // Genera muchos corazones volando
+  for (let i = 0; i < 34; i++) {
+    const heart = document.createElement('span');
+    heart.textContent = ['💗','💖','💕','💞','💓'][Math.floor(Math.random()*5)];
+    heart.style.position = 'fixed';
+    heart.style.left = `${10 + Math.random()*80}%`;
+    heart.style.bottom = '-40px';
+    heart.style.fontSize = `${1.5 + Math.random()*2.5}em`;
+    heart.style.opacity = 0.8 + Math.random()*0.2;
+    heart.style.pointerEvents = 'none';
+    heart.style.zIndex = 2100;
+    heart.style.transition = 'transform 2.2s cubic-bezier(.68,-0.55,.27,1.55), opacity 2.2s';
+    corazones.appendChild(heart);
+
+    setTimeout(() => {
+      heart.style.transform = `translateY(-${320 + Math.random()*120}px) scale(${0.8 + Math.random()*1.2}) rotate(${Math.random()*60-30}deg)`;
+      heart.style.opacity = 0;
+    }, 30 + Math.random()*300);
+
+    setTimeout(() => heart.remove(), 2300 + Math.random()*400);
+  }
+
+  setTimeout(() => {
+    mensaje.style.opacity = '0';
+    setTimeout(() => { mensaje.style.display = 'none'; }, 400);
+  }, 2200);
+};

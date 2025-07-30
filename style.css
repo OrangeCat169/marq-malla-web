@@ -286,6 +286,14 @@ body {
   border-left: 8px solid #ff80ab;
 }
 
+/* Ejemplo para más tipos o dependencias */
+.ramo.sin-dependencias {
+  border-left: 8px solid #f8bbd0;
+}
+.ramo.con-muchas-dependencias {
+  border-left: 12px solid #ec407a;
+}
+
 /* Esquina de color para grupos de prerrequisito */
 .esquina-color {
   position: absolute;
@@ -298,7 +306,7 @@ body {
   background: #ffd600; /* Amarillo pastel por defecto, pero JS lo sobrescribe */
   box-shadow: 0 2px 6px #0002;
   content: "";
-  display: block;
+  display: none;
 }
 
 /* Fuegos artificiales */
@@ -322,19 +330,60 @@ body {
   top: 24px;
   right: 36px;
   z-index: 10;
-  background: rgba(255, 228, 242, 0.85);
-  border-radius: 16px;
-  padding: 8px 18px;
-  box-shadow: 0 2px 8px #f0629233;
-  font-size: 1em;
-  color: #ad1457;
+  background: linear-gradient(90deg, #fce4ec 60%, #fff0f6 100%);
+  border-radius: 18px;
+  padding: 10px 22px;
+  box-shadow: 0 2px 16px #f0629233;
+  font-size: 1.1em;
+  color: #ec407a;
   user-select: none;
+  border: 2px solid #f06292;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 #zoom-slider {
-  vertical-align: middle;
   accent-color: #ec407a;
+  width: 110px;
+  height: 4px;
+  border-radius: 6px;
+  background: #f8bbd0;
+  outline: none;
   margin: 0 8px;
+  transition: background 0.2s;
+}
+
+#zoom-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ec407a;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px #f0629222;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#zoom-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ec407a;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px #f0629222;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#zoom-slider::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ec407a;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px #f0629222;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
 .titulo-malla-svg {
@@ -400,4 +449,164 @@ body {
   fill: #ec407a;
   font-family: monospace;
   pointer-events: none;
+}
+
+.anio-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin: 24px 0 18px 0;
+}
+.anio-nav button {
+  background: #f8bbd0;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.5em;
+  color: #ad1457;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #f0629222;
+  transition: background 0.2s, transform 0.2s;
+}
+.anio-nav button:active {
+  background: #f06292;
+  color: #fff;
+  transform: scale(0.95);
+}
+#anio-label {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #ec407a;
+  min-width: 90px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.decoracion-anio {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 24px;
+  margin-top: 8px;
+  min-height: 38px;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.animalito, .flor {
+  font-size: 2em;
+  filter: drop-shadow(0 2px 6px #f8bbd0);
+  animation: saltito 2.5s var(--delay, 0s) infinite cubic-bezier(.68,-0.55,.27,1.55);
+  display: inline-block;
+  will-change: transform;
+}
+
+.mini-animalito {
+  width: 36px;
+  height: 36px;
+  margin: 0 8px;
+  filter: drop-shadow(0 2px 6px #f8bbd0);
+  animation: saltito 2.5s var(--delay, 0s) infinite cubic-bezier(.68,-0.55,.27,1.55);
+  display: inline-block;
+  will-change: transform;
+}
+
+@keyframes saltito {
+  0% { transform: translateY(0) scale(1);}
+  10% { transform: translateY(-12px) scale(1.1);}
+  20% { transform: translateY(0) scale(1);}
+  100% { transform: translateY(0) scale(1);}
+}
+
+/* Iconos SVG personalizados */
+.icono-monito-gato {
+  width: 36px;
+  height: 36px;
+  fill: #fff0f6;
+}
+.icono-monito-gato .cara {
+  fill: #f8bbd0;
+}
+.icono-monito-gato .ojo {
+  fill: #ec407a;
+}
+.icono-monito-gato .boca {
+  fill: #ec407a;
+}
+
+.icono-monito-perezoso {
+  width: 36px;
+  height: 36px;
+  fill: #fce4ec;
+}
+.icono-monito-perezoso .cara {
+  fill: #f8bbd0;
+}
+.icono-monito-perezoso .ojo {
+  fill: #ad1457;
+}
+.icono-monito-perezoso .boca {
+  fill: #ad1457;
+}
+
+#corazones-vuelo span {
+  will-change: transform, opacity;
+  filter: drop-shadow(0 2px 8px #f06292aa);
+  transition: transform 2.2s cubic-bezier(.68,-0.55,.27,1.55), opacity 2.2s;
+}
+#boton-amor:hover {
+  opacity: 1 !important;
+}
+
+#mensaje-amor {
+  animation: mensaje-pop 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+  border: 3px solid #f06292;
+  background: linear-gradient(120deg, #fff0f6 80%, #f8bbd0 100%);
+  box-shadow: 0 8px 48px #f06292aa, 0 2px 0 #fff;
+}
+.mensaje-wow {
+  position: relative;
+  z-index: 1;
+}
+.mensaje-wow .corazon-grande {
+  font-size: 2.2em;
+  vertical-align: middle;
+  animation: corazon-late 1.2s infinite cubic-bezier(.68,-0.55,.27,1.55);
+  margin: 0 18px;
+  filter: drop-shadow(0 2px 8px #f06292aa);
+}
+.mensaje-wow .mensaje-texto {
+  display: inline-block;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #d81b60;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 12px #f8bbd0, 0 2px 0 #fff;
+  margin: 0 8px;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+.mensaje-wow .corazones-pequenos {
+  margin-top: 18px;
+  font-size: 1.3em;
+  letter-spacing: 8px;
+  animation: corazon-pequeno-pop 1.2s infinite alternate;
+}
+@keyframes mensaje-pop {
+  0% { transform: scale(0.7) translate(-50%,-50%); opacity: 0;}
+  70% { transform: scale(1.08) translate(-50%,-50%); opacity: 1;}
+  100% { transform: scale(1) translate(-50%,-50%);}
+}
+@keyframes corazon-late {
+  0%, 100% { transform: scale(1);}
+  20% { transform: scale(1.25);}
+  40% { transform: scale(1);}
+}
+@keyframes corazon-pequeno-pop {
+  0% { opacity: 0.7; transform: translateY(0);}
+  100% { opacity: 1; transform: translateY(-8px);}
 }
