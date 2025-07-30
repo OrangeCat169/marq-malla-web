@@ -1,0 +1,42 @@
+[
+  { "Codigo": "AQT0000", "Nombre": "Taller de Formación y Representación I", "Semestre": 1, "Prerrequisitos": [] },
+  { "Codigo": "MAT1307", "Nombre": "Geometría Digital I", "Semestre": 1, "Prerrequisitos": [] },
+  { "Codigo": "AQH0000", "Nombre": "Introducción a la Arquitectura", "Semestre": 1, "Prerrequisitos": [] },
+  { "Codigo": "AQU0000", "Nombre": "Ciudad y Paisaje I", "Semestre": 1, "Prerrequisitos": [] },
+  { "Codigo": "AQC0100", "Nombre": "Introducción a la Construcción Arquitectónica", "Semestre": 1, "Prerrequisitos": [] },
+  { "Codigo": "FIS1032", "Nombre": "Física General", "Semestre": 1, "Prerrequisitos": [] },
+
+  { "Codigo": "AQT0200", "Nombre": "Taller de Formación y Representación II", "Semestre": 2, "Prerrequisitos": ["AQT0000"] },
+  { "Codigo": "AQR1000", "Nombre": "Producción Digital I", "Semestre": 2, "Prerrequisitos": [] },
+  { "Codigo": "AQH0200", "Nombre": "Arquitectura Antigua y la Tradición Clásica", "Semestre": 2, "Prerrequisitos": [] },
+  { "Codigo": "AQU0200", "Nombre": "Ciudad y Paisaje II", "Semestre": 2, "Prerrequisitos": ["AQU0000"] },
+  { "Codigo": "AQC0200", "Nombre": "Técnicas y Construcción", "Semestre": 2, "Prerrequisitos": ["AQC0100"] },
+  { "Codigo": "AQC0110", "Nombre": "Elementos Estructurales: Fundamentos", "Semestre": 2, "Prerrequisitos": ["FIS1032"] },
+
+  { "Codigo": "AQT0300", "Nombre": "Taller de Formación y Representación III", "Semestre": 3, "Prerrequisitos": ["AQT0200"] },
+  { "Codigo": "AQR2000", "Nombre": "Producción Digital II", "Semestre": 3, "Prerrequisitos": ["AQR1000"] },
+  { "Codigo": "AQH0300", "Nombre": "Arquitectura Moderna", "Semestre": 3, "Prerrequisitos": ["AQH0200"] },
+  { "Codigo": "AQU0300", "Nombre": "Ciudad y Paisaje III", "Semestre": 3, "Prerrequisitos": ["AQU0200"] },
+  { "Codigo": "AQC0300", "Nombre": "Instalaciones, Sistemas y Proyecto", "Semestre": 3, "Prerrequisitos": ["AQC0200"] },
+  { "Codigo": "AQC0210", "Nombre": "Sismo-resistente", "Semestre": 3, "Prerrequisitos": ["AQC0110"] },
+
+  { "Codigo": "AQT0400", "Nombre": "Taller de Formación IV: Ciudad y Paisaje", "Semestre": 4, "Prerrequisitos": ["AQT0300"] },
+  { "Codigo": "AQH0400", "Nombre": "Debates de la Arquitectura Contemporánea", "Semestre": 4, "Prerrequisitos": ["AQH0300"] },
+  { "Codigo": "AQU0404", "Nombre": "Ciudad y Paisaje IV: Urbanismo desde el Paisaje", "Semestre": 4, "Prerrequisitos": ["AQU0300"] },
+
+  { "Codigo": "AQT0500", "Nombre": "Taller de Proyecto I", "Semestre": 5, "Prerrequisitos": ["AQT0400"] },
+  { "Codigo": "ARQ3000", "Nombre": "Formulación de Proyectos de Investigación", "Semestre": 5, "Prerrequisitos": [] },
+  { "Codigo": "FIL184A", "Nombre": "Ética en la Ciudad y el Paisaje", "Semestre": 5, "Prerrequisitos": [] },
+
+  { "Codigo": "AQT006X", "Nombre": "Taller de Proyecto II", "Semestre": 6, "Prerrequisitos": ["AQT0500"] },
+
+  { "Codigo": "AQT007X", "Nombre": "Taller de Arquitectura MARQ", "Semestre": 7, "Prerrequisitos": ["AQT006X"] },
+
+  { "Codigo": "AQT008X", "Nombre": "Taller Optativo MARQ", "Semestre": 8, "Prerrequisitos": ["AQT007X"] },
+
+  { "Codigo": "ARQ3070", "Nombre": "Taller de Especialidad en Investigación y Proyecto", "Semestre": 9, "Prerrequisitos": ["AQT008X"] },
+
+  { "Codigo": "ARQ3071", "Nombre": "Taller de Proyecto de Título", "Semestre": 10, "Prerrequisitos": ["ARQ3070"] },
+
+  { "Codigo": "AQT100A", "Nombre": "Proyecto de Título Final", "Semestre": 11, "Prerrequisitos": ["ARQ3071"] }
+]
