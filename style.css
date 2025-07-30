@@ -10,16 +10,15 @@ h1 {
 
 #contenedor-malla {
   display: flex;
-  gap: 24px;
-  justify-content: center;
+  gap: 36px; /* Más separación entre semestres */
+  justify-content: flex-start;
   align-items: flex-start;
   margin-top: 40px;
   overflow-x: auto;
 }
 
 .semestre {
-  margin-bottom: 30px;
-  min-width: 220px;
+  min-width: 240px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px #0001;
@@ -28,6 +27,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  gap: 20px; /* Más separación entre ramos */
 }
 
 .semestre h2 {
@@ -41,14 +41,27 @@ h1 {
 .ramo {
   display: flex;
   align-items: center;
-  margin: 8px 0;
-  padding: 8px 10px;
+  margin: 0;
+  padding: 14px 10px 10px 10px;
   border-radius: 7px;
   box-shadow: 0 1px 3px #0001;
-  font-size: 0.98em;
+  font-size: 1em;
   transition: background 0.2s;
   position: relative;
   background: #f8f8f8;
+  min-height: 48px;
+}
+
+.ramo .aprobado-label {
+  position: absolute;
+  top: -18px;
+  left: 10px;
+  font-size: 0.85em;
+  color: #888;
+  background: #e0e0e0;
+  padding: 1px 8px;
+  border-radius: 8px;
+  pointer-events: none;
 }
 
 .ramo input[type="checkbox"] {
@@ -70,8 +83,10 @@ h1 {
 }
 
 .ramo.aprobado {
-  background-color: #d0f5d8;
-  border: 1.5px solid #81c784;
+  background-color: #e0e0e0;
+  border: 1.5px solid #bdbdbd;
+  color: #888;
+  opacity: 1;
 }
 
 .ramo label {
@@ -79,5 +94,3 @@ h1 {
   flex: 1;
   user-select: none;
 }
-
-/* Opcional: líneas de conexión entre ramos/prerrequisitos (requiere JS extra) */

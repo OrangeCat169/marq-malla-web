@@ -9,12 +9,6 @@ fetch('malla.json')
 
 const estado = {};
 
-// Lista de códigos de ramos que pueden ser clickeados (edita según lo que necesites)
-const ramosClickeables = [
-  "AQT0000", "MAT1307", "AQH0000", "AQU0000", "AQC0100", "FIS1032",
-  // agrega aquí los códigos que quieras permitir clickear
-];
-
 function renderMalla() {
   const contenedor = document.getElementById('contenedor-malla');
   contenedor.innerHTML = '';
@@ -38,8 +32,8 @@ function renderMalla() {
       check.type = 'checkbox';
       check.checked = estado[ramo.Codigo] || false;
 
-      // Solo habilita el checkbox si el ramo está en la lista y puede tomarse
-      check.disabled = !(ramosClickeables.includes(ramo.Codigo) && puedeTomar(ramo));
+      // Solo habilita el checkbox si puede tomarse y no está aprobado
+      check.disabled = !puedeTomar(ramo) || check.checked;
 
       const label = document.createElement('label');
       label.textContent = ramo.Nombre;
@@ -49,6 +43,12 @@ function renderMalla() {
 
       if (check.checked) {
         div.classList.add('aprobado');
+        check.disabled = true;
+        // Texto "Aprobado" encima
+        const aprobadoLabel = document.createElement('span');
+        aprobadoLabel.className = 'aprobado-label';
+        aprobadoLabel.textContent = 'Aprobado';
+        div.appendChild(aprobadoLabel);
       } else if (!check.disabled) {
         div.classList.add('desbloqueado');
       } else {
