@@ -8,36 +8,76 @@ h1 {
   text-align: center;
 }
 
+#contenedor-malla {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 40px;
+  overflow-x: auto;
+}
+
 .semestre {
   margin-bottom: 30px;
-  border-left: 5px solid #007acc;
-  padding-left: 15px;
-  background: white;
-  padding: 10px;
-  border-radius: 8px;
+  min-width: 220px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0001;
+  padding: 18px 12px 12px 12px;
+  border-left: 6px solid #007acc;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.semestre h2 {
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 18px;
+  color: #007acc;
+  font-weight: bold;
 }
 
 .ramo {
   display: flex;
   align-items: center;
-  margin: 5px 0;
-  padding: 4px;
-  border-radius: 5px;
+  margin: 8px 0;
+  padding: 8px 10px;
+  border-radius: 7px;
+  box-shadow: 0 1px 3px #0001;
+  font-size: 0.98em;
+  transition: background 0.2s;
+  position: relative;
+  background: #f8f8f8;
 }
 
 .ramo input[type="checkbox"] {
   margin-right: 10px;
+  accent-color: #007acc;
+  width: 18px;
+  height: 18px;
 }
 
 .ramo.bloqueado {
-  color: gray;
-  background-color: #eee;
+  color: #aaa;
+  background-color: #f0f0f0;
+  opacity: 0.7;
 }
 
 .ramo.desbloqueado {
-  background-color: #fff9c4;
+  background-color: #fffbe7;
+  border: 1.5px solid #ffe082;
 }
 
 .ramo.aprobado {
-  background-color: #c8e6c9;
+  background-color: #d0f5d8;
+  border: 1.5px solid #81c784;
 }
+
+.ramo label {
+  cursor: pointer;
+  flex: 1;
+  user-select: none;
+}
+
+/* Opcional: líneas de conexión entre ramos/prerrequisitos (requiere JS extra) */
